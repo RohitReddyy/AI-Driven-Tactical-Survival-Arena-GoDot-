@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bullet001"]
+
+[ext_resource type="Script" path="res://scripts/weapons/Bullet.gd" id="1_bullet"]
+
+[sub_resource type="CircleShape2D" id="CS_bullet"]
+radius = 5.0
+
+[sub_resource type="RectangleShape2D" id="RS_bullet"]
+size = Vector2(14, 5)
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_bullet")
+collision_layer = 8
+collision_mask = 4
+
+[node name="Sprite" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-7, -2.5, 7, -2.5, 7, 2.5, -7, 2.5)
+color = Color(0.2, 0.9, 1.0, 1.0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RS_bullet")
+
+[node name="TrailParticles" type="GPUParticles2D" parent="."]
+amount = 8
+lifetime = 0.2
+explosiveness = 0.0
+randomness = 0.5
+local_coords = false
+speed_scale = 1.0
+emitting = true

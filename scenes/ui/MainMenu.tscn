@@ -1,0 +1,81 @@
+[gd_scene load_steps=2 format=3 uid="uid://mainmenu001"]
+
+[ext_resource type="Script" path="res://scripts/ui/MainMenu.gd" id="1_menu"]
+
+[node name="MainMenu" type="Control"]
+script = ExtResource("1_menu")
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.05, 0.05, 0.12)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(320, 0)
+alignment = 1
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBox"]
+text = "AI TACTICAL\nSURVIVAL ARENA"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 34
+modulate = Color(0.2, 0.8, 1.0)
+
+[node name="SubTitle" type="Label" parent="CenterContainer/VBox"]
+text = "Survive as long as you can"
+horizontal_alignment = 1
+modulate = Color(0.6, 0.6, 0.7)
+
+[node name="HighScoreLabel" type="Label" parent="CenterContainer/VBox"]
+text = "BEST: 0 pts | Waves: 0"
+horizontal_alignment = 1
+modulate = Color(1.0, 0.9, 0.2)
+
+[node name="Spacer" type="Control" parent="CenterContainer/VBox"]
+custom_minimum_size = Vector2(0, 20)
+
+[node name="PlayBtn" type="Button" parent="CenterContainer/VBox"]
+text = "PLAY"
+custom_minimum_size = Vector2(0, 50)
+
+[node name="ControlsBtn" type="Button" parent="CenterContainer/VBox"]
+text = "CONTROLS"
+custom_minimum_size = Vector2(0, 44)
+
+[node name="QuitBtn" type="Button" parent="CenterContainer/VBox"]
+text = "QUIT"
+custom_minimum_size = Vector2(0, 44)
+
+[node name="ControlsPanel" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_right = 160.0
+offset_top = -140.0
+offset_bottom = 140.0
+
+[node name="ControlsContent" type="VBoxContainer" parent="ControlsPanel"]
+layout_mode = 2
+
+[node name="ControlsTitle" type="Label" parent="ControlsPanel/ControlsContent"]
+text = "CONTROLS"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 18
+
+[node name="ControlsList" type="Label" parent="ControlsPanel/ControlsContent"]
+text = "WASD / Arrow Keys  — Move
+Space              — Dash (invincible!)
+Left Mouse Button  — Shoot
+ESC                — Pause
+
+Survive each wave.
+Choose upgrades between waves.
+Boss every 5 waves!"

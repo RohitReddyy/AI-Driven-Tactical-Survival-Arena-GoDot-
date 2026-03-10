@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=3 uid="uid://tank001"]
+
+[ext_resource type="Script" path="res://scripts/ai/TankEnemy.gd" id="1_tank"]
+[ext_resource type="Script" path="res://scripts/ai/StateMachine.gd" id="2_sm"]
+[ext_resource type="Script" path="res://scripts/ai/states/IdleState.gd" id="3_idle"]
+[ext_resource type="Script" path="res://scripts/ai/states/PatrolState.gd" id="4_patrol"]
+[ext_resource type="Script" path="res://scripts/ai/states/ChaseState.gd" id="5_chase"]
+[ext_resource type="Script" path="res://scripts/ai/states/AttackState.gd" id="6_attack"]
+[ext_resource type="Script" path="res://scripts/ai/states/RetreatState.gd" id="7_retreat"]
+
+[sub_resource type="CircleShape2D" id="CS_tank"]
+radius = 22.0
+
+[sub_resource type="CircleShape2D" id="CS_hurtbox"]
+radius = 24.0
+
+[node name="TankEnemy" type="CharacterBody2D"]
+script = ExtResource("1_tank")
+collision_layer = 4
+collision_mask = 1
+
+[node name="Sprite" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-18, -18, 18, -18, 18, 18, -18, 18)
+color = Color(0.4, 0.7, 0.4, 1.0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CS_tank")
+
+[node name="Hurtbox" type="Area2D" parent="." groups=["enemy_hurtbox"]]
+collision_layer = 4
+collision_mask = 8
+monitoring = true
+
+[node name="HurtboxShape" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CS_hurtbox")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_top = -40.0
+offset_left = -24.0
+offset_right = 24.0
+offset_bottom = -28.0
+show_percentage = false
+value = 100.0
+
+[node name="HitFlashTimer" type="Timer" parent="."]
+one_shot = true
+wait_time = 0.1
+
+[node name="DeathParticles" type="GPUParticles2D" parent="."]
+amount = 30
+lifetime = 0.6
+one_shot = true
+emitting = false
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 28.0
+target_desired_distance = 28.0
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_sm")
+initial_state = "Idle"
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_idle")
+
+[node name="Patrol" type="Node" parent="StateMachine"]
+script = ExtResource("4_patrol")
+
+[node name="Chase" type="Node" parent="StateMachine"]
+script = ExtResource("5_chase")
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("6_attack")
+
+[node name="Retreat" type="Node" parent="StateMachine"]
+script = ExtResource("7_retreat")

@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://player001"]
+
+[ext_resource type="Script" path="res://scripts/player/Player.gd" id="1_player"]
+
+[sub_resource type="CapsuleShape2D" id="CS_player"]
+radius = 14.0
+height = 28.0
+
+[sub_resource type="CircleShape2D" id="CS_hurtbox"]
+radius = 14.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_player")
+collision_layer = 2
+collision_mask = 5
+
+[node name="Sprite" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, -16, 12, 12, 0, 6, -12, 12)
+color = Color(0.2, 0.8, 1.0, 1.0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CS_player")
+
+[node name="GunPivot" type="Node2D" parent="."]
+position = Vector2(0, 0)
+
+[node name="Muzzle" type="Marker2D" parent="GunPivot"]
+position = Vector2(22, 0)
+
+[node name="Hurtbox" type="Area2D" parent="." groups=["player_hurtbox"]]
+collision_layer = 0
+collision_mask = 16
+monitoring = true
+monitorable = true
+
+[node name="HurtboxShape" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CS_hurtbox")
+
+[node name="InvulnTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DashParticles" type="GPUParticles2D" parent="."]
+amount = 16
+lifetime = 0.3
+emitting = false
+local_coords = false
+
+[node name="HitParticles" type="GPUParticles2D" parent="."]
+amount = 12
+lifetime = 0.4
+one_shot = true
+emitting = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

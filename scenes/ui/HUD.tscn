@@ -1,0 +1,90 @@
+[gd_scene load_steps=3 format=3 uid="uid://hud001"]
+
+[ext_resource type="Script" path="res://scripts/ui/HUD.gd" id="1_hud"]
+[ext_resource type="Script" path="res://scripts/ui/MiniMap.gd" id="2_minimap"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_hud")
+layer = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_right = 0.0
+offset_bottom = 60.0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_top = 8
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TopRow" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="HealthLabel" type="Label" parent="MarginContainer/VBox/TopRow"]
+text = "HP: 100/100"
+modulate = Color(0.2, 1.0, 0.3)
+
+[node name="HealthBar" type="ProgressBar" parent="MarginContainer/VBox/TopRow"]
+custom_minimum_size = Vector2(160, 18)
+max_value = 100.0
+value = 100.0
+show_percentage = false
+
+[node name="Separator1" type="VSeparator" parent="MarginContainer/VBox/TopRow"]
+
+[node name="WaveLabel" type="Label" parent="MarginContainer/VBox/TopRow"]
+text = "WAVE 1"
+modulate = Color(1.0, 1.0, 0.2)
+
+[node name="Separator2" type="VSeparator" parent="MarginContainer/VBox/TopRow"]
+
+[node name="EnemyLabel" type="Label" parent="MarginContainer/VBox/TopRow"]
+text = "ENEMIES: 0"
+modulate = Color(1.0, 0.4, 0.4)
+
+[node name="Separator3" type="VSeparator" parent="MarginContainer/VBox/TopRow"]
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer/VBox/TopRow"]
+text = "SCORE: 0"
+modulate = Color(0.8, 0.8, 1.0)
+
+[node name="DashRow" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="DashLabel" type="Label" parent="MarginContainer/VBox/DashRow"]
+text = "DASH READY"
+modulate = Color(0.2, 1.0, 1.0)
+
+[node name="DashBar" type="ProgressBar" parent="MarginContainer/VBox/DashRow"]
+custom_minimum_size = Vector2(100, 12)
+max_value = 1.2
+value = 1.2
+show_percentage = false
+
+[node name="WaveAnnounce" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 0.35
+anchor_bottom = 0.35
+offset_left = -200.0
+offset_right = 200.0
+offset_top = -20.0
+offset_bottom = 20.0
+modulate = Color(1, 1, 1, 0)
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MiniMap" type="Control" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -172.0
+offset_right = -12.0
+offset_top = -102.0
+offset_bottom = -12.0
+script = ExtResource("2_minimap")
